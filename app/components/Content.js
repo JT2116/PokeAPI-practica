@@ -2,7 +2,7 @@ export function Content(props) {
     let name = props;
 
     return `
-    <section class="post-page">
+    <section class="contents-page">
         <article>${name.rendered}</article>
     <section>`;
 }

@@ -7,7 +7,7 @@ export async function ajax(props) {
     .catch(err => {
         let message = err.statudText || "Ocurrio un error";
 
-        document.getElementById("posts").innerHTML = `
+        document.getElementById("contents").innerHTML = `
         <div class = "error">
             <p>Error ${err.status}: ${message}</p>
         </div>
