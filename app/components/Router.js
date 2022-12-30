@@ -4,31 +4,33 @@ import { Content } from "./Content.js";
 import { ContentCard } from "./ContentCard.js";
 
 export async function Router() {
-    ContentCard
+    ContentCard    
 
     const d = document,
     w = window,
     $contents = d.getElementById("contents");
 
-    let {hash} = location;
+    let {hash} = location, count = 1;
 
     $contents.innerHTML = null;
 
+    // if (!hash || hash ==="#/") {
 
-    if (!hash || hash ==="#/") {
+
         await ajax({
-            url: api.POKEMON,
+            url: `${api.NEXT_POKEMON}`,
             cbSuccess:(contents) => {
-                console.log(contents);                
+                // console.log(contents);                
                 let html = "";
-                contents.results.forEach(contents => (html +=ContentCard(contents)));
-
+                // console.log(contents.results.findIndex(id => id.name === contents.results[4].name))
+                // console.log(contents.results.forEach('2'));
+                // contents.results.forEach(contents => (html +=ContentCard(contents,contents.findIndex(id=>id.name===contents.name))));
+                contents.results.forEach(contents => (html +=ContentCard(contents,count++)));
                 $contents.innerHTML = html;
-
-                
             }
-        });                
-    }
+        });
+        
 
-    
+    // }
+
 }

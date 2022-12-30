@@ -1,44 +1,43 @@
 import { ContentCard } from "../components/ContentCard.js";
-import { SearchCard } from "../components/SearchCard.js";
-import api from "./poke_api.js";
-import { ajax } from "./ajax.js";
+import api from "../helpers/poke_api.js";
+import { ajax } from "../helpers/ajax.js";
 
 export async function infinite_scroll() {
     const d = document,
     w = window;
 
-    let query = localStorage.getItem("wpSearch"),
-    apiURL,
-    Components;//High Order Components
+    let apiURL, count = 21;
 
-    w.addEventListener("scroll", async e =>{
+    w.addEventListener("scroll", async e => {
         const {scrollTop,clientHeight,scrollHeight} = d.documentElement,
         {hash} = w.location;
 
-        // console.log(scrollTop,clientHeight,scrollHeight,hash);
         if (scrollTop + clientHeight >= scrollHeight) {
-            api.page++;
+            
+            api.limit+=20;
 
-            if (!hash || hash === "#/") {
-                apiURL = `${api.POKEMON}&page=${api.page}`;
-                Components = ContentCard;                
-            } 
-            else {
-                return false;
-            }
+
+            // apiURL = `${api.NEXT_POKEMON}&limit=${api.limit}`;
+            apiURL = `${api.POKEMON}?offset=${api.limit}`;
+
+            // console.log(apiURL);
 
             d.querySelector(".loader").style.display = "block";
 
             await ajax({
                 url: apiURL,
-                cbSuccess:(POKEMON) =>{
+                cbSuccess:(contents) => {
+                    // console.log(contents.indexOf(contents.results[0].name));                
                     let html = "";
-                    contents.forEach((contents)=>(html += Components(post)));
+                    contents.results.forEach(contents => (html +=ContentCard(contents,count++)));
                     d.getElementById("contents").insertAdjacentHTML("beforeend",html);
                     d.querySelector(".loader").style.display = "none";
                 }
             });
+        } else {
+
         }
-            
+
     });
+
 }

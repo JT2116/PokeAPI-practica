@@ -13,6 +13,13 @@ body {
     overflow-x: hidden;
 }
 
+.grid-fluid {
+    margin: 2rem;
+    max-width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
 header {
     padding: 0.5rem;
     position: sticky;
@@ -31,4 +38,13 @@ img {
     display: block;
     width: 4rem;
     height: 4rem;
+}
+
+
+.contents-card {
+    margin: 1rem;
+    padding: 1rem;
+    width: 80%;
+    text-align: center;
+    background-color: #eceff1;
 }

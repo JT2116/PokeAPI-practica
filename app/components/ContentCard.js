@@ -1,16 +1,20 @@
-export function ContentCard(props) {
-    let {name} = props;
+export function ContentCard(props,number) {    
+    let {name,url} = props;
 
-    // document.addEventListener("click",e =>{
-    //     if(!e.target.matches(".post-card a")) return false;
+    // console.log(url[34]);
 
-    //     localStorage.setItem("wpPostId",e.target.dataset.id);
+    document.addEventListener("click",e =>{
+        if(!e.target.matches(".post-card a")) return false;
 
-    // });
+        localStorage.setItem("wpPostId",e.target.dataset.id);
+
+    });
 
     return `
     <article class = "contents-card">
-        <article>${name}</article>
-        <a>Ver datos</a>
-    <article>`;
+        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${number}.png" alt="${name}">
+        <h4>#${number}</h4>
+        <h3>${name}</h3>
+        <a href="${url}">Ver datos</a>
+    </article>`;
 }
