@@ -5,7 +5,8 @@ export function Title() {
     
     $h1.innerHTML = `
     <a href="${api.DOMAIN}" target="_blank" rel="noopener"
-    >${api.NAME.toUpperCase()}</a>`;
+    ><img src="app/assets/pokeapi_256.png">
+    </a>`;
  
     return $h1;
 

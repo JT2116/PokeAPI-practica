@@ -16,25 +16,29 @@ export async function infinite_scroll() {
             
             api.limit+=20;
 
+            if(!hash || hash === "#/") {
+                
+                // apiURL = `${api.NEXT_POKEMON}&limit=${api.limit}`;
+                apiURL = `${api.POKEMON}?offset=${api.limit}`;
 
-            // apiURL = `${api.NEXT_POKEMON}&limit=${api.limit}`;
-            apiURL = `${api.POKEMON}?offset=${api.limit}`;
+                // console.log(apiURL);
 
-            // console.log(apiURL);
+                d.querySelector(".loader").style.display = "block";
 
-            d.querySelector(".loader").style.display = "block";
+                await ajax({
+                    url: apiURL,
+                    cbSuccess:(contents) => {
+                        // console.log(contents.indexOf(contents.results[0].name));                
+                        let html = "";
+                        contents.results.forEach(contents => (html +=ContentCard(contents,count++)));
+                        d.getElementById("contents").insertAdjacentHTML("beforeend",html);
+                        d.querySelector(".loader").style.display = "none";
+                    }
+                });
 
-            await ajax({
-                url: apiURL,
-                cbSuccess:(contents) => {
-                    // console.log(contents.indexOf(contents.results[0].name));                
-                    let html = "";
-                    contents.results.forEach(contents => (html +=ContentCard(contents,count++)));
-                    d.getElementById("contents").insertAdjacentHTML("beforeend",html);
-                    d.querySelector(".loader").style.display = "none";
-                }
-            });
-        } else {
+            } else {
+                return false
+            }
 
         }
 

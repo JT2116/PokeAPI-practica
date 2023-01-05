@@ -10,27 +10,30 @@ export async function Router() {
     w = window,
     $contents = d.getElementById("contents");
 
-    let {hash} = location, count = 1;
+    let {hash} = location; 
+    let count = 1;
 
     $contents.innerHTML = null;
 
-    // if (!hash || hash ==="#/") {
-
+    if (!hash || hash ==="#/") {
 
         await ajax({
             url: `${api.NEXT_POKEMON}`,
-            cbSuccess:(contents) => {
-                // console.log(contents);                
+            cbSuccess:(contents) => {                
                 let html = "";
-                // console.log(contents.results.findIndex(id => id.name === contents.results[4].name))
-                // console.log(contents.results.forEach('2'));
-                // contents.results.forEach(contents => (html +=ContentCard(contents,contents.findIndex(id=>id.name===contents.name))));
                 contents.results.forEach(contents => (html +=ContentCard(contents,count++)));
                 $contents.innerHTML = html;
             }
         });
         
-
-    // }
+    } else {
+        await ajax({
+            url: `${api.POKEMON}/${localStorage.getItem("paContentId")}/`,
+            cbSuccess:(content) => {
+                $contents.innerHTML = Content(content);
+            }
+        });
+    }
+    
 
 }
