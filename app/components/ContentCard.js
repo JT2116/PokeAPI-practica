@@ -6,7 +6,7 @@ export function ContentCard(props,number) {
 
         localStorage.setItem("paContentId",e.target.dataset.id);
 
-        console.log(localStorage.getItem("paContentId"))
+        // console.log(localStorage.getItem("paContentId"))
     });
 
     return `
@@ -14,6 +14,6 @@ export function ContentCard(props,number) {
         <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${number}.png" alt="${name}">
         <h4>#${number}</h4>
         <h3>${name}</h3>
-        <a class="contents-links" href="${number}/" data-id="${number}">Datas</a>
+        <a class="contents-links" href="#/${number}" data-id="${number}">Datas</a>
     </article>`;
 }

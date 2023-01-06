@@ -22,7 +22,7 @@ export function App() {
 
     infinite_scroll();
 
-    console.log(localStorage.getItem("paContentId"))
+    // console.log(localStorage.getItem("paContentId"))
     
     // ajax({
     //     url: `${api.POKEMON}/1/`,
