@@ -30,9 +30,10 @@ export async function Router() {
         await ajax({
             url: `${api.POKEMON}/${localStorage.getItem("paContentId")}/`,
             cbSuccess:(content) => {
-                console.log(content);
+                // console.log(content);
                 $contents.innerHTML = Content(content);
-            }
+                d.querySelector(".loader").style.display = "none";
+            }            
         });
     }
     
